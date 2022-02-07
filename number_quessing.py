@@ -15,7 +15,7 @@ else:
 #przedział otwarty z prawej strony
 #jeśli wstawimy tylko jedną liczbę to wygenerowana zostanie liczba z przedziału od 0 do podanej liczby minus 1
 #randint ma przedział zamknięty z prawej strony
-random_number = random.randint(end_range)  
-print(r)
+random_number = random.randint(0, end_range)  
+print(random_number)
 
 
