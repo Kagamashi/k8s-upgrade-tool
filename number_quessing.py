@@ -26,5 +26,6 @@ while True:
 
   if user_quess == random_number:
     print('Zgadłeś, BRAWO!')
+    break
   else:
     print('Nie udało się, powodzenia następnym razem :(')
