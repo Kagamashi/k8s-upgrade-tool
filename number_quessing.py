@@ -15,8 +15,10 @@ else:
 #jeśli wstawimy tylko jedną liczbę to wygenerowana zostanie liczba z przedziału od 0 do podanej liczby minus 1
 #randint ma przedział zamknięty z prawej strony
 random_number = random.randint(0, end_range)  
+quesses = 0
 
 while True:
+  quesses += 1
   user_quess = input('Spróbuj odgadnąć NASZĄ liczbę: ')
   if user_quess.isdigit():
     end_range = int(user_quess) 
@@ -29,3 +31,6 @@ while True:
     break
   else:
     print('Nie udało się, powodzenia następnym razem :(')
+    
+print('Potrzebowałeś JEDYNIE ' + quesses + ' prób :)')
+#print("Potrzebowałeś JEDYNIE", quesses + "prób :)")
