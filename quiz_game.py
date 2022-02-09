@@ -1,3 +1,5 @@
+#GRA W QUIZ - po odpowiedzi na wszystkie pytania pokazuje ile % odpowiedzi było poprawnych
+
 print("Witaj w quizie o Telekomunikacji!")
 
 playing = input("Czy masz ochotę zagrać? ")
