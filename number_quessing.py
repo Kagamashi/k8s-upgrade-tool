@@ -29,11 +29,10 @@ while True:
   if user_quess == random_number:
     print('Zgadłeś, BRAWO!')
     break
-  else:
-    if user_quess > random_number:
-      print('Podana liczba jest zbyt DUŻA')
-    else
-      print('Podana liczba jest za MAŁA')
+  elif user_quess > random_number:
+    print('Podana liczba jest zbyt DUŻA')
+  else
+    print('Podana liczba jest za MAŁA')
     
 print('Potrzebowałeś JEDYNIE ' + str(quesses) + ' prób :)')
 #print("Potrzebowałeś JEDYNIE", quesses + "prób :)")
