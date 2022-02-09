@@ -32,5 +32,5 @@ while True:
   else:
     print('Nie udało się, powodzenia następnym razem :(')
     
-print('Potrzebowałeś JEDYNIE ' + quesses + ' prób :)')
+print('Potrzebowałeś JEDYNIE ' + str(quesses) + ' prób :)')
 #print("Potrzebowałeś JEDYNIE", quesses + "prób :)")
