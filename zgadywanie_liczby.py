@@ -1,3 +1,7 @@
+#GRA W ZGADYWANIE LICZBY - użytkownik podaje liczność zbioru losowych liczb a następnie próbuje odgadnąć, która z nich została wytypowana przez komputer
+#przy każdej próbie odgadnięcia użytkownik jest informowany czy podana przez niego liczba jest mniejsza lub większa od tej wytypowanej przez komputer
+#po prawidłowym odgadnięciu obok gratulacji wyświetlana jest liczba prób
+
 import random
 
 end_range = input('Podaj ile liczb chcesz wygenerować: ') #odpowiedź użytkownika jest stringiem
