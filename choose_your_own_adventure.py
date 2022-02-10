@@ -1,3 +1,4 @@
-#
+# Became a WITCHER
 
-import random
+name = input("Podaj swoje imię podróżniku: ")
+print("Witaj", name, "w swojej nowej przygodzie!")
