@@ -1,5 +1,5 @@
 # Gra w papier, kamień, nożyce między użytkownikiem a komputerem. 
-# 
+# Zliczanie punktów po każdej wygranie i wyświetlenie wyniku użytkownika oraz komputera po zakończeniu rozgrywki. 
 
 import random
 
