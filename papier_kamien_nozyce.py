@@ -21,8 +21,23 @@ while True:
   computer_pick = options[random_number]
   print("Komputer wybrał", computer_pick + ".")
   
+  if user_input == "kamień" and computer_pick == "nożyce":
+    print("Wygrałeś! :)")
+    user_score += 1
+    
+  elif user_input == "papier" and computer_pick == "kamień":
+    print("Wygrałeś! :)")
+    user_score += 1
+    
+  elif user_input == "nożyce" and computer_pick == "papier":
+    print("Wygrałeś! :)")
+    user_score += 1
   
+  else:
+    print("Przegrałeś :(")
+    computer_score += 1
   
-  
+print("Udało Ci się wygrać", user_score, "razy.")
+print("Komputer wygrał", computer_score, "razy."
 print("Do następnego razu! :)")
   
