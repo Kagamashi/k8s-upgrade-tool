@@ -1,5 +1,5 @@
 # Gra w papier, kamień, nożyce między użytkownikiem a komputerem. 
-#
+# 
 
 import random
 
@@ -19,6 +19,9 @@ while True:
   random_number = random.randint(0, 2)
   # papier: 0, kamień: 1, nożyce: 2
   computer_pick = options[random_number]
+  print("Komputer wybrał", computer_pick + ".")
+  
+  
   
   
 print("Do następnego razu! :)")
