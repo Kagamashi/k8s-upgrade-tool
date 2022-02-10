@@ -1,3 +1,4 @@
+# Gra w papier, kamień, nożyce między użytkownikiem a komputerem. 
 #
 
 import random
@@ -12,6 +13,10 @@ while True:
     
   if user_input is not in ["papier", "kamień", "nożyce"]:
     continue
+    
+  random_number = random.randint(0, 2)
+  #
   
   
+print("Do następnego razu! :)")
   
