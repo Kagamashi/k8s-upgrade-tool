@@ -5,9 +5,9 @@ print("Witaj", name, "na Wiedźmińskiej scieżce!")
 
 answer = input(
   
-if answer == "":
+if answer == "left":
   
-elif answer == "":
+elif answer == "right":
   
 else:
   print("Nie miałeś takiej opcji. PRZE GRY WASZ!")
