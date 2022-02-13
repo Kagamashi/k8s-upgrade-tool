@@ -1,13 +1,13 @@
-# Became a WITCHER
+# Zostań studentem prestiżowego WETI 
 
-name = input("Podaj swoje imię podróżniku: ")
-print("Witaj", name, "na Wiedźmińskiej scieżce!")
+name = input("Podaj swoje imię studencie: ")
+print("Witaj", name, "w Mechanicznej Pomarańczy")
 
-answer = input(
+answer = input("Mijając próg wejścia przechodzisz obok szatni której pilnuje dobrze zbudowany, pozbawiony włosów na głowie mężczyzna o niezbyt inteligentnym wyrazie twarzy. Zostawiasz kurtkę (TAK) czy postanawiasz prześlizgnąć się w niej unikając wzroku ochroniarza (NIE)?")
   
-if answer == "left":
+if answer == "TAK":
   
-elif answer == "right":
+elif answer == "NIE":
   
 else:
   print("Nie miałeś takiej opcji. PRZE GRY WASZ!")
