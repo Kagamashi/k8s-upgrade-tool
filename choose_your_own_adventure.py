@@ -17,7 +17,14 @@ if answer == "TAK":
                  
                  
 elif answer == "NIE":
-  print()
+  answer = input("Podchodzisz do szatni 
+                 
+  if answer ==
+    print()
+  elif answer ==
+    print()
+  else:
+    print("Nie miałeś takiej opcji. Wyrzucają Cię ze studiów :(")
                  
 else:
   print("Nie miałeś takiej opcji. Wyrzucają Cię ze studiów :(")
