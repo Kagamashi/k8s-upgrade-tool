@@ -11,18 +11,18 @@ if answer == "TAK":
   if answer == "lame"
     print("Upijasz się z kumplami i zgonujesz na kanapie obok Możejko. PRZEGRYWASZ!")
   elif answer == "chad"
-    print(")
+    print("Następnego dnia spotykacie się na kawę i żyjecie długo i szczęśliwie. WYGRYWASZ!")
   else:
     print("Nie miałeś takiej opcji. Wyrzucają Cię z Pomarańczy :(")
                  
                  
 elif answer == "NIE":
-  answer = input("Starasz się prześlizgnąć 
+  answer = input("Starasz się prześlizgnąć niezauważenie obok ochroniarza jednakże Twoje umiejętności skradania są na bardzo niskim poziomie i ochroniarz łapie Cię za bark. Co robisz? Możesz udawać idiotę i powiedzieć, że nie zauważyłeś szatni (idiota) lub wdać się z łysym ochroniarzem w bójkę (jeszcze większy idiota)?")
                  
-  if answer == ""
-    print()
-  elif answer == ""
-    print()
+  if answer == "idiota"
+    print("Ochroniarz wyrzuca Cię z baru tak, że lądujesz w śmietnikach. PRZEGRYWASZ!")
+  elif answer == "jeszcze większy idiota"
+    print("Wyprowadzasz nieumiejętnie prawego sierpowego prosto w lewy polik łysego ale nie robi to na nim żadnego wrażenia. Po kontrze budzisz się następnego dnia na trawniku pod akdemikiem numer 3. PRZEGRYWASZ!")
   else:
     print("Nie miałeś takiej opcji. Wyrzucają Cię z Pomarańczy :(")
                  
