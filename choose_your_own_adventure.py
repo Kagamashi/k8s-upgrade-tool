@@ -19,9 +19,9 @@ if answer == "TAK":
 elif answer == "NIE":
   answer = input("Starasz się prześlizgnąć 
                  
-  if answer ==
+  if answer == ""
     print()
-  elif answer ==
+  elif answer == ""
     print()
   else:
     print("Nie miałeś takiej opcji. Wyrzucają Cię ze studiów :(")
