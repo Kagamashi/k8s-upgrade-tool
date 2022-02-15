@@ -15,7 +15,9 @@ def add(): #definicje funkcji
   #'a' is a mode ('w' -> nadpisuje plik; 'r' -> tylko odczyt; 'a' -> jeśli plik istnieje możemy coś dodać, jeśli nie istnieje tworzymy go
 
 def view():
-  pass
+  with open('passwords.txt', 'r') as f:
+    for line in f.readlines():
+      print(line)
 
 while True:
 action = input("Would you add new password or view the existing ones (add/view)? If you want to quit press Q.").lower()
