@@ -16,7 +16,7 @@ def load_key():
   file.close() #trzeba zamknąć plik za każdym razem jak go otwieramy (żeby się uchronić przez zbędnymi problemami)
   return
 
-master_pwd = input("What is the master password? ")
+#master_pwd = input("What is the master password? ")
 key = load.key() + master_pwd.encode() #konwersja do postaci bajtów
 fer = Fernet(key)
 
