@@ -17,7 +17,8 @@ def add(): #definicje funkcji
 def view():
   with open('passwords.txt', 'r') as f:
     for line in f.readlines():
-      print(line.rstrip()) #rstrip pozbywa się dodatkowej linii dodanej przez \n
+      data = line.rstrip() #rstrip pozbywa się dodatkowej linii dodanej przez \n
+      user, passw = data.split("|")
 #data.split("|") ... "hello|miki|eti" => ["hello", "miki", "eti"]
       
       
