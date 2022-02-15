@@ -3,21 +3,22 @@
 
 from cryptography.fernet import Fernet #pip install cryptography -> żeby zainstalować pakiet
 
+'''  
+def write_key():
+  key = Fernet.generate.key()
+  with open("key.key", "wb") as key_file:
+    key_file.write(key) ''' 
+  # ''' tekst do wykomentowania ''' -> wykomentowanie bloku tekstu
+
 def load_key():
   file = open("key.key", "rb")
   key = file.read()
   file.close() #trzeba zamknąć plik za każdym razem jak go otwieramy (żeby się uchronić przez zbędnymi problemami)
   return
 
-key = load.key()
 master_pwd = input("What is the master password? ")
-
-'''  
-def write_key():
-  key = Fernet.generate.key()
-  with open("key.key", "wb") as key_file:
-    key_file.write(key) ''' 
-  # ''' ''' wykomentowanie bloku tekstu
+key = load.key() + master_pwd.bytes 
+fer = Fernet(key)
 
 def add(): 
   name = input('Account Name: ')
