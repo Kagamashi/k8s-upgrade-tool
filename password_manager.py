@@ -10,6 +10,7 @@ def add(): #definicje funkcji
   with open('password.txt', 'a') as f: #
   #file = open('password.txt.', 'a') -> trzeba manualnie zamknąć plik
   #file.close() 
+    f.write(name + "|" + pwd + "\n")
   
   #'a' is a mode ('w' -> nadpisuje plik; 'r' -> tylko odczyt; 'a' -> jeśli plik istnieje możemy coś dodać, jeśli nie istnieje tworzymy go
 
