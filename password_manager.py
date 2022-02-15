@@ -4,15 +4,15 @@
 master_pwd = input("What is the master password? ")
 
 while True:
-action = input("Would you add new password or view the existing ones (add/view)? If you want to quit press Q.".lower())
-if action == "add":
+action = input("Would you add new password or view the existing ones (add/view)? If you want to quit press Q.").lower()
+if action == "q":
+  break
+
+elif action =="add":
   pass
 
 elif action =="view":
   pass
-
-elif action =="q":
-  quit()
   
 else: 
   "Wrong action."
