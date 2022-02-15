@@ -17,8 +17,10 @@ def add(): #definicje funkcji
 def view():
   with open('passwords.txt', 'r') as f:
     for line in f.readlines():
-      print(line)
-
+      print(line.rstrip()) #rstrip pozbywa się dodatkowej linii dodanej przez \n
+#data.split("|") ... "hello|miki|eti" => ["hello", "miki", "eti"]
+      
+      
 while True:
 action = input("Would you add new password or view the existing ones (add/view)? If you want to quit press Q.").lower()
 if action == "q":
