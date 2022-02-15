@@ -20,7 +20,7 @@ def view():
       data = line.rstrip() #rstrip pozbywa się dodatkowej linii dodanej przez \n
       user, passw = data.split("|")
 #data.split("|") ... "hello|miki|eti" => ["hello", "miki", "eti"]
-      print("User:", user, "Password:", passw)
+      print("User:", user, "| Password:", passw)
       
       
 while True:
