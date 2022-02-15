@@ -3,16 +3,22 @@
 
 master_pwd = input("What is the master password? ")
 
+def add(): #definicje funkcji
+  pass
+
+def view():
+  pass
+
 while True:
 action = input("Would you add new password or view the existing ones (add/view)? If you want to quit press Q.").lower()
 if action == "q":
   break
 
 elif action =="add":
-  pass
+  add()
 
 elif action =="view":
-  pass
+  view()
   
 else: 
   "Wrong action."
