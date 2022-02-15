@@ -4,7 +4,14 @@
 master_pwd = input("What is the master password? ")
 
 def add(): #definicje funkcji
-  pass
+  name = input('Account Name: ')
+  pwd = input('Password: ')
+  
+  with open('password.txt', 'a') as f: #
+  #file = open('password.txt.', 'a') -> trzeba manualnie zamknąć plik
+  #file.close() 
+  
+  #'a' is a mode ('w' -> nadpisuje plik; 'r' -> tylko odczyt; 'a' -> jeśli plik istnieje możemy coś dodać, jeśli nie istnieje tworzymy go
 
 def view():
   pass
