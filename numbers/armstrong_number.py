@@ -1,15 +1,19 @@
 # Armstrong number - it is a number which is equal to the sum of cube of its digits
 # Example: 153 -> 1^3 + 5^3 + 3^3 = 1 + 125 + 27 = 153 
+# Example_2: 1634 -> 1^4 + 6^4 + 3^4 + 4^4 = 1 + 1296 + 81 + 256 = 1634
+
+mode = input("You want to check a number with 3 digits or more? ")
 
 num = int(input("Enter a number: ")) #zapytanie użytkownika o liczbę
 
+order = len(str(num)) #sprawdzenie długości ciągu
 sum = 0 #inicjalizacja sumy na 0
 
 temp = num 
 
 while temp > 0: 
   digit = temp % 10 #uzyskujemy ostatnią cyfrę przy użyciu operatora Modulo %;
-  sum += digit ** 3 #reszta z dzielenia danej liczby przez 10 jest ostatnią cyfrą tej liczby
+  sum += digit ** order #reszta z dzielenia danej liczby przez 10 jest ostatnią cyfrą tej liczby
   temp //= 10 
   
 if num == sum:
