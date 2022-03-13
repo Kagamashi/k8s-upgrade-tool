@@ -9,9 +9,9 @@ if num > 1:
             print(num, "nie jest liczbą pierwszą.")
             print(i,"times",num//i,"is",num)
             break
-        else:
-            print(num,"jest liczbą pierwszą.")
-            break
+    else:
+        print(num,"jest liczbą pierwszą.")
+          
 
 else: #jeśli liczba jest równa lub mniejsza od 1 
     print(num,"nie jest liczbą pierwszą.")
