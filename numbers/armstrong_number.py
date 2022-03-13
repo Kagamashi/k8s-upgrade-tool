@@ -1,16 +1,16 @@
 # Armstrong number - it is a number which is equal to the sum of cube of its digits
 # Example: 153 -> 1^3 + 5^3 + 3^3 = 1 + 125 + 27 = 153 
 
-num = int(input("Enter a number: ")) #take input from the user
+num = int(input("Enter a number: ")) #zapytanie użytkownika o liczbę
 
-sum = 0 #initialize sum
+sum = 0 #inicjalizacja sumy na 0
 
 temp = num 
 
-while temp > 0:
-  digit = temp % 10
-  sum += digit ** 3
-  temp //= 10
+while temp > 0: 
+  digit = temp % 10 #uzyskujemy ostatnią cyfrę przy użyciu operatora Modulo %;
+  sum += digit ** 3 #reszta z dzielenia danej liczby przez 10 jest ostatnią cyfrą tej liczby
+  temp //= 10 
   
 if num == sum:
   print(num, "is an Armstrong number")
