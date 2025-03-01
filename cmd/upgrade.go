@@ -9,7 +9,10 @@ import (
 	"aks-upgrade-cli/cmd"
 	"aks-upgrade-cli/internal/azure"
 	"github.com/spf13/cobra"
+	"github.com/sirupsen/logrus"
 )
+
+var log = logrus.New()
 
 func main() {
 	if err := cmd.Execute(); err != nil {
@@ -52,6 +55,7 @@ var upgradeCmd = &cobra.Command{
 
 func init() {
 	cmd.RootCmd.AddCommand(upgradeCmd)
+	log.SetFormatter(&logrus.JSONFormatter{})
 
 	upgradeCmd.Flags().String("subscription-id", "", "Azure Subscription ID (required)")
 	upgradeCmd.Flags().String("resource-group", "", "Azure Resource Group (required)")
@@ -67,3 +71,8 @@ func init() {
 	_ = upgradeCmd.MarkFlagRequired("cluster")
 	_ = upgradeCmd.MarkFlagRequired("version")
 }
+
+log.WithFields(logrus.Fields{
+    "cluster": clusterName,
+    "resource_group": resourceGroupName,
+}).Info("Starting AKS upgrade process")
