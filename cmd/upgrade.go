@@ -1,48 +1,57 @@
-package cmd
+package main
 
 import (
+	"context"
 	"fmt"
 	"log"
-	"aks-upgrade-cli/internal/azure"
-	"aks-upgrade-cli/internal/kubernetes"
+	"time"
 
+	"aks-upgrade-cli/cmd"
+	"aks-upgrade-cli/internal/azure"
 	"github.com/spf13/cobra"
 )
+
+func main() {
+	if err := cmd.Execute(); err != nil {
+		log.Fatalf("Error: %v", err)
+	}
+}
 
 // upgradeCmd represents the upgrade command
 var upgradeCmd = &cobra.Command{
 	Use:   "upgrade",
 	Short: "Upgrade an AKS cluster",
-	Long:  "This command upgrades an Azure Kubernetes Service (AKS) cluster to the latest stable Kubernetes version after performing necessary checks.",
+	Long:  "This command upgrades an Azure Kubernetes Service (AKS) cluster to the specified Kubernetes version.",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("Running pre-upgrade checks...")
+		subscriptionID, _ := cmd.Flags().GetString("subscription-id")
+		resourceGroupName, _ := cmd.Flags().GetString("resource-group")
+		clusterName, _ := cmd.Flags().GetString("cluster")
+		kubernetesVersion, _ := cmd.Flags().GetString("version")
 
-		// Run pre-upgrade checks before proceeding
-		if err := azure.CheckBreakingChanges(); err != nil {
-			log.Fatalf("Upgrade blocked due to breaking changes: %v", err)
-		}
-		if err := kubernetes.CheckPDBs(); err != nil {
-			log.Fatalf("Upgrade blocked due to PDB issues: %v", err)
-		}
-		if err := azure.CheckNetworkSettings(); err != nil {
-			log.Fatalf("Upgrade blocked due to network configuration issues: %v", err)
-		}
-		if err := kubernetes.CheckToolCompatibility(); err != nil {
-			log.Fatalf("Upgrade blocked due to incompatible tools: %v", err)
+		if subscriptionID == "" || resourceGroupName == "" || clusterName == "" || kubernetesVersion == "" {
+			log.Fatalf("Missing required flags: --subscription-id, --resource-group, --cluster, --version")
 		}
 
-		fmt.Println("Pre-checks passed. Proceeding with AKS upgrade...")
-		// TODO: Implement actual AKS upgrade logic
+		fmt.Println("Starting AKS cluster upgrade...")
+		err := azure.UpgradeAKSCluster(subscriptionID, resourceGroupName, clusterName, kubernetesVersion)
+		if err != nil {
+			log.Fatalf("Failed to upgrade AKS cluster: %v", err)
+		}
+
+		fmt.Println("AKS cluster upgrade completed successfully!")
 	},
 }
 
 func init() {
-	RootCmd.AddCommand(upgradeCmd)
+	cmd.RootCmd.AddCommand(upgradeCmd)
 
-	upgradeCmd.Flags().StringP("cluster", "c", "", "AKS cluster name (required)")
-	upgradeCmd.Flags().StringP("resource-group", "g", "", "Azure resource group (required)")
-	upgradeCmd.Flags().BoolP("auto-approve", "y", false, "Automatically approve the upgrade")
+	upgradeCmd.Flags().String("subscription-id", "", "Azure Subscription ID (required)")
+	upgradeCmd.Flags().String("resource-group", "", "Azure Resource Group (required)")
+	upgradeCmd.Flags().String("cluster", "", "AKS Cluster Name (required)")
+	upgradeCmd.Flags().String("version", "", "Kubernetes Version to upgrade to (required)")
 
-	_ = upgradeCmd.MarkFlagRequired("cluster")
+	_ = upgradeCmd.MarkFlagRequired("subscription-id")
 	_ = upgradeCmd.MarkFlagRequired("resource-group")
+	_ = upgradeCmd.MarkFlagRequired("cluster")
+	_ = upgradeCmd.MarkFlagRequired("version")
 }

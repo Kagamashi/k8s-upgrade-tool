@@ -1,9 +1,53 @@
+// This file contain all interactions with Azure SDK for Go: cluster upgrade logic, fetching AKS details, checking curretn version.
+
 package azure
 
 import (
+	"context"
 	"fmt"
 	"log"
+	"time"
+
+	"github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/containerservice/armcontainerservice"
+	"github.com/Azure/azure-sdk-for-go/sdk/azidentity"
 )
+
+// UpgradeAKSCluster upgrades the specified AKS cluster to a new Kubernetes version
+func UpgradeAKSCluster(subscriptionID, resourceGroupName, clusterName, kubernetesVersion string) error {
+	ctx := context.Background()
+	cred, err := azidentity.NewDefaultAzureCredential(nil)
+	if err != nil {
+		return fmt.Errorf("failed to obtain Azure credentials: %v", err)
+	}
+
+	client, err := armcontainerservice.NewManagedClustersClient(subscriptionID, cred, nil)
+	if err != nil {
+		return fmt.Errorf("failed to create AKS client: %v", err)
+	}
+
+	poller, err := client.BeginUpgrade(ctx, resourceGroupName, clusterName, armcontainerservice.ManagedClusterUpgradeProfile{
+		KubernetesVersion: &kubernetesVersion,
+	}, nil)
+	if err != nil {
+		return fmt.Errorf("failed to start upgrade: %v", err)
+	}
+
+	fmt.Println("AKS upgrade in progress...")
+	for {
+		resp, err := poller.Poll(ctx)
+		if err != nil {
+			return fmt.Errorf("error polling for upgrade status: %v", err)
+		}
+		if poller.Done() {
+			break
+		}
+		fmt.Println("Waiting for upgrade to complete...")
+		time.Sleep(30 * time.Second)
+	}
+
+	fmt.Println("AKS upgrade completed successfully!")
+	return nil
+}
 
 // CheckBreakingChanges validates if there are any AKS-related breaking changes
 func CheckBreakingChanges() error {
