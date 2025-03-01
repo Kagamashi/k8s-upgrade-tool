@@ -44,3 +44,17 @@ func CheckToolCompatibility() error {
 	fmt.Println("Tool compatibility check completed.")
 	return nil
 }
+
+func VerifyClusterHealth() error {
+    cmd := exec.Command("kubectl", "get", "nodes", "--no-headers")
+    output, err := cmd.Output()
+    if err != nil {
+        return fmt.Errorf("failed to check node status: %v", err)
+    }
+    
+    if strings.Contains(string(output), "NotReady") {
+        return fmt.Errorf("some nodes are not ready after upgrade")
+    }
+
+    return nil
+}

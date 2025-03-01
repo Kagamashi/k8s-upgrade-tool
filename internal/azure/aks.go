@@ -13,12 +13,17 @@ import (
 )
 
 // UpgradeAKSCluster upgrades the specified AKS cluster to a new Kubernetes version
-func UpgradeAKSCluster(subscriptionID, resourceGroupName, clusterName, kubernetesVersion string) error {
+func UpgradeAKSCluster(subscriptionID, resourceGroupName, clusterName, kubernetesVersion string, dryRun bool) error {
 	ctx := context.Background()
 	cred, err := azidentity.NewDefaultAzureCredential(nil)
 	if err != nil {
 		return fmt.Errorf("failed to obtain Azure credentials: %v", err)
 	}
+
+	if dryRun {
+        fmt.Printf("Dry-run: Would upgrade %s in %s to version %s\n", clusterName, resourceGroupName, kubernetesVersion)
+        return nil
+    }
 
 	client, err := armcontainerservice.NewManagedClustersClient(subscriptionID, cred, nil)
 	if err != nil {
@@ -47,6 +52,31 @@ func UpgradeAKSCluster(subscriptionID, resourceGroupName, clusterName, kubernete
 
 	fmt.Println("AKS upgrade completed successfully!")
 	return nil
+}
+
+func GetLatestKubernetesVersion(subscriptionID, location string) (string, error) {
+    ctx := context.Background()
+    cred, err := azidentity.NewDefaultAzureCredential(nil)
+    if err != nil {
+        return "", fmt.Errorf("failed to obtain Azure credentials: %v", err)
+    }
+
+    client, err := armcontainerservice.NewManagedClustersClient(subscriptionID, cred, nil)
+    if err != nil {
+        return "", fmt.Errorf("failed to create AKS client: %v", err)
+    }
+
+    result, err := client.ListKubernetesVersions(ctx, location, nil)
+    if err != nil {
+        return "", fmt.Errorf("failed to list available versions: %v", err)
+    }
+
+    if len(result.Values) == 0 {
+        return "", fmt.Errorf("no Kubernetes versions found")
+    }
+
+    latestVersion := result.Values[len(result.Values)-1].Version
+    return *latestVersion, nil
 }
 
 // CheckBreakingChanges validates if there are any AKS-related breaking changes

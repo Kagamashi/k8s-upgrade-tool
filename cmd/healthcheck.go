@@ -2,6 +2,9 @@ package cmd
 
 import (
 	"fmt"
+	"log"
+
+	"aks-upgrade-cli/internal/kubernetes"
 	"github.com/spf13/cobra"
 )
 
@@ -12,7 +15,23 @@ var healthCheckCmd = &cobra.Command{
 	Long:  "This command checks the health of an AKS cluster by validating node and pod statuses.",
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("Checking cluster health...")
-		// TODO: Implement health check logic
+
+		// Verify node readiness
+		if err := kubernetes.VerifyClusterHealth(); err != nil {
+			log.Fatalf("Cluster health check failed: %v", err)
+		}
+
+		// Check for blocking PDBs
+		if err := kubernetes.CheckPDBs(); err != nil {
+			log.Fatalf("Pod Disruption Budget issue detected: %v", err)
+		}
+
+		// Validate compatibility of installed tools (KEDA, Kiali)
+		if err := kubernetes.CheckToolCompatibility(); err != nil {
+			log.Fatalf("Tool compatibility check failed: %v", err)
+		}
+
+		fmt.Println("Cluster health check completed successfully!")
 	},
 }
 

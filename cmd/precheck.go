@@ -19,8 +19,8 @@ var preCheckCmd = &cobra.Command{
 
 		// 1. Check for breaking changes
 		if err := azure.CheckBreakingChanges(); err != nil {
-			log.Fatalf("Breaking changes detected: %v", err)
-		}
+			log.Fatalf("Upgrade blocked due to breaking changes: %v", err)
+		}		
 
 		// 2. Validate PodDisruptionBudgets
 		if err := kubernetes.CheckPDBs(); err != nil {

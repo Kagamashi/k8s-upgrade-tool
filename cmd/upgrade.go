@@ -32,13 +32,21 @@ var upgradeCmd = &cobra.Command{
 			log.Fatalf("Missing required flags: --subscription-id, --resource-group, --cluster, --version")
 		}
 
+		if err := kubernetes.CheckPDBs(); err != nil {
+			log.Fatalf("Upgrade blocked due to PDB issues: %v", err)
+		}	
+		
 		fmt.Println("Starting AKS cluster upgrade...")
 		err := azure.UpgradeAKSCluster(subscriptionID, resourceGroupName, clusterName, kubernetesVersion)
 		if err != nil {
 			log.Fatalf("Failed to upgrade AKS cluster: %v", err)
 		}
 
-		fmt.Println("AKS cluster upgrade completed successfully!")
+		fmt.Println("Verifying cluster health after upgrade...")
+		if err := kubernetes.VerifyClusterHealth(); err != nil {
+			log.Fatalf("Post-upgrade health check failed: %v", err)
+		}
+		fmt.Println("Upgrade completed successfully, and cluster health is stable.")
 	},
 }
 
@@ -49,6 +57,10 @@ func init() {
 	upgradeCmd.Flags().String("resource-group", "", "Azure Resource Group (required)")
 	upgradeCmd.Flags().String("cluster", "", "AKS Cluster Name (required)")
 	upgradeCmd.Flags().String("version", "", "Kubernetes Version to upgrade to (required)")
+	upgradeCmd.Flags().Bool("dry-run", false, "Simulate upgrade without applying changes")
+	
+	dryRun, _ := cmd.Flags().GetBool("dry-run")
+	err := azure.UpgradeAKSCluster(subscriptionID, resourceGroupName, clusterName, kubernetesVersion, dryRun)
 
 	_ = upgradeCmd.MarkFlagRequired("subscription-id")
 	_ = upgradeCmd.MarkFlagRequired("resource-group")
