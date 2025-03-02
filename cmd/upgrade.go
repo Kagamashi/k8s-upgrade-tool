@@ -1,4 +1,4 @@
-package main
+package cmd
 
 import (
 	"context"
@@ -6,7 +6,7 @@ import (
 	"log"
 	"time"
 
-	"aks-upgrade-cli/cmd"
+	// "aks-upgrade-cli/cmd"
 	"aks-upgrade-cli/internal/azure"
 	"github.com/spf13/cobra"
 	"github.com/sirupsen/logrus"

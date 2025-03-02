@@ -2,7 +2,6 @@ package cmd
 
 import (
 	"fmt"
-	"log"
 	"aks-upgrade-cli/internal/azure"
 	"aks-upgrade-cli/internal/kubernetes"
 
