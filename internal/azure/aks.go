@@ -5,7 +5,6 @@ package azure
 import (
 	"context"
 	"fmt"
-	"log"
 	"time"
 
 	"github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/containerservice/armcontainerservice"
